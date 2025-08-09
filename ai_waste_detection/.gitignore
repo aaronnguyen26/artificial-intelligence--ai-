@@ -1,0 +1,31 @@
+# Python specific
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.ipynb_checkpoints/ # Jupyter notebook checkpoints
+
+# Large model files (usually don't commit pre-trained models)
+*.pt
+*.pth
+*.bin
+
+# Large datasets or temporary data files
+*.zip
+*.csv # Be careful: If your CSVs are small and essential for the project to run, remove this line.
+      # Otherwise, ignore them if they are too large or generated locally.
+
+# Ultralytics/YOLOv8 specific (if applicable to this project)
+runs/
+
+# Operating System Files
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Environment variables
+.env
+
+# VS Code specific (optional)
+.vscode/
+
