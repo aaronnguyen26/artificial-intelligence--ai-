@@ -29,3 +29,6 @@ Thumbs.db # Windows
 # VS Code specific (optional)
 .vscode/
 
+# Ignore datasets
+ai_waste_detection/data/train/
+ai_waste_detection/data/validation/
