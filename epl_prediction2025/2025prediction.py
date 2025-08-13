@@ -73,10 +73,8 @@ def calculate_elo(df, base_elo=1500, k=20):
         home_elo, away_elo = elos[home], elos[away]
         home_elo_list.append(home_elo)
         away_elo_list.append(away_elo)
-        # Expected result
         exp_home = 1 / (1 + 10 ** ((away_elo - home_elo) / 400))
         exp_away = 1 - exp_home
-        # Actual result
         if result == 'H':
             score_home, score_away = 1, 0
         elif result == 'A':
