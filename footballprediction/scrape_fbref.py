@@ -40,9 +40,11 @@ def get_team_stats(url):
             
             # Reset the index after dropping rows
             df = df.reset_index(drop=True)
-            
-            # Removed the debugging print statement from here.
-            
+
+            # NEW LINE: Drop the columns you don't want with the correct names
+            columns_to_drop = ['Playing Time_MP', 'Playing Time_Starts', 'Playing Time_Min', 'Playing Time_90s']
+            df = df.drop(columns=columns_to_drop)
+
             return df
         except ValueError as e:
             print(f"No table with id 'stats_squads_standard_for' found on {url}. Error: {e}")
