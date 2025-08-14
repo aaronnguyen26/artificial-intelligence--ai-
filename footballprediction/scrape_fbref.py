@@ -41,10 +41,9 @@ def get_team_stats(url):
             # Reset the index after dropping rows
             df = df.reset_index(drop=True)
 
-            # Updated line: Drop the columns you don't want with the correct names
-            # Using the exact names you provided from the table headers
+            # Drop the columns we have decided to not include
             columns_to_drop = [
-                '# Pl',
+                '# Pl', 
                 'Age',
                 'Playing Time_MP', 
                 'Playing Time_Starts', 
@@ -76,15 +75,28 @@ def get_team_stats(url):
 
 # --- Main script execution starts here ---
 
-# The URL for the 2024-2025 Premier League stats
-url = "https://fbref.com/en/comps/9/2024-2025/2024-2025-Premier-League-Stats"
+# A list of years to scrape
+years = range(2017, 2025)
 
-# Call the function to get your DataFrame
-team_stats_df = get_team_stats(url)
+# The base URL, with a placeholder for the year.
+base_url = "https://fbref.com/en/comps/9/{year}-{next_year}/Premier-League-Stats"
 
-if team_stats_df is not None:
-    print("\nFinal DataFrame head:")
-    print(team_stats_df.head())
+for year in years:
+    # Construct the URL for the specific year
+    next_year = year + 1
+    url = base_url.format(year=year, next_year=next_year)
+    print(f"\n--- Scraping data for the {year}-{next_year} season from {url} ---")
+    
+    # Call the function to get your DataFrame
+    team_stats_df = get_team_stats(url)
 
-    output_path = 'footballprediction/fbref_data/scraped_team_stats.csv'
-    team_stats_df.to_csv(output_path, index=False)
+    if team_stats_df is not None:
+        print("Final DataFrame head:")
+        print(team_stats_df.head())
+        
+        # Define the output file name with the year
+        output_path = f'footballprediction/fbref_data/scrapped_team_stats_{year}.csv'
+        team_stats_df.to_csv(output_path, index=False)
+        print(f"\nSuccessfully saved the scraped data to '{output_path}'")
+    else:
+        print(f"Could not scrape data for the {year}-{next_year} season.")
