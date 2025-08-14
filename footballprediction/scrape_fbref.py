@@ -41,9 +41,32 @@ def get_team_stats(url):
             # Reset the index after dropping rows
             df = df.reset_index(drop=True)
 
-            # NEW LINE: Drop the columns you don't want with the correct names
-            columns_to_drop = ['Playing Time_MP', 'Playing Time_Starts', 'Playing Time_Min', 'Playing Time_90s']
-            df = df.drop(columns=columns_to_drop)
+            # Updated line: Drop the columns you don't want with the correct names
+            # Using the exact names you provided from the table headers
+            columns_to_drop = [
+                '# Pl',
+                'Age',
+                'Playing Time_MP', 
+                'Playing Time_Starts', 
+                'Playing Time_Min', 
+                'Playing Time_90s', 
+                'Shooting_xG/Sh',
+                'Shooting_SoT%',
+                'Expected_npxG+xAG',
+                'Per 90 Minutes_Gls',
+                'Per 90 Minutes_Ast',
+                'Per 90 Minutes_G+A',
+                'Per 90 Minutes_G-PK',
+                'Per 90 Minutes_G+A-PK',
+                'Per 90 Minutes_xG',
+                'Per 90 Minutes_xAG',
+                'Per 90 Minutes_xG+xAG',
+                'Per 90 Minutes_npxG',
+                'Per 90 Minutes_npxG+xAG'
+            ]
+            
+            # Drop the columns if they exist in the DataFrame
+            df = df.drop(columns=[col for col in columns_to_drop if col in df.columns])
 
             return df
         except ValueError as e:
@@ -62,3 +85,6 @@ team_stats_df = get_team_stats(url)
 if team_stats_df is not None:
     print("\nFinal DataFrame head:")
     print(team_stats_df.head())
+
+    output_path = 'footballprediction/fbref_data/scraped_team_stats.csv'
+    team_stats_df.to_csv(output_path, index=False)
