@@ -1,5 +1,3 @@
-
-
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score
@@ -11,14 +9,14 @@ import xgboost as xgb
 
 # 1. Load Data
 csv_files = [
-    'epl_prediction2025/epl_data/epl2024.csv',
-    'epl_prediction2025/epl_data/epl2023.csv',
-    'epl_prediction2025/epl_data/epl2022.csv',
-    'epl_prediction2025/epl_data/epl2021.csv',
-    'epl_prediction2025/epl_data/epl2020.csv',
-    'epl_prediction2025/epl_data/epl2019.csv',
-    'epl_prediction2025/epl_data/epl2018.csv',
-    'epl_prediction2025/epl_data/epl2017.csv',
+    'footballprediction/epl_data/epl2024.csv',
+    'footballprediction/epl_data/epl2023.csv',
+    'footballprediction/epl_data/epl2022.csv',
+    'footballprediction/epl_data/epl2021.csv',
+    'footballprediction/epl_data/epl2020.csv',
+    'footballprediction/epl_data/epl2019.csv',
+    'footballprediction/epl_data/epl2018.csv',
+    'footballprediction/epl_data/epl2017.csv',
 ]
 df_list = [pd.read_csv(f) for f in csv_files]
 df = pd.concat(df_list, ignore_index=True)
